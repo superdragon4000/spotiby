@@ -34,13 +34,13 @@ $ npm run test:cov
 
 ```bash
 # To create migrations use:
-$ npm run typeorm:migration:create src/database/migration/<MigrationName>
+$ npm run migration:create src/database/migration/<MigrationName>
 
 # To generate migrations use:
-$ npm run typeorm:migration:generate src/database/migration/<MigrationName>
+$ npm run migration:generate src/database/migration/<MigrationName>
 
 # To run migrations use:
-$ npm run typeorm:migration:run
+$ npm run migration:run
 ```
 
 ## Seeds
