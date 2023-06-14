@@ -7,6 +7,12 @@ export enum UserRole {
   USER = "user"
 }
 
+export enum UserStatus {
+  ACTIVATED = "activated",
+  BLOCKED = "blocked",
+  UNACTIVATED = "unactivated"
+}
+
 @Entity()
 class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -31,6 +37,13 @@ class User extends BaseEntity {
     default: UserRole.USER
   })
   role: UserRole;
+
+  @Column({
+    type: "enum",
+    enum: UserStatus,
+    default: UserStatus.UNACTIVATED
+  })
+  status: UserStatus;
 }
 
 export default User;
