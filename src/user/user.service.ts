@@ -28,4 +28,10 @@ export class UserService {
       status: UserStatus.UNACTIVATED,
     });
   }
+
+  async findOne(email: string): Promise<User | null> {
+    return await this.userRepository.findOneBy({
+      email: Equal(email)
+    })
+  }
 }
