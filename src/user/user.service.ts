@@ -17,7 +17,10 @@ export class UserService {
       email: Equal(createUserDto.email),
     });
     if (candidate)
-      throw new HttpException('Email address is already in use', HttpStatus.CONFLICT);
+      throw new HttpException(
+        'Email address is already in use',
+        HttpStatus.CONFLICT,
+      );
 
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
     return await this.userRepository.save({
@@ -31,7 +34,11 @@ export class UserService {
 
   async findOne(email: string): Promise<User | null> {
     return await this.userRepository.findOneBy({
-      email: Equal(email)
-    })
+      email: Equal(email),
+    });
+  }
+
+  async getAll(): Promise<User[]> {
+    return await this.userRepository.find({});
   }
 }

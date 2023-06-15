@@ -1,7 +1,8 @@
-import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
-import User from 'src/model/user.entity';
+import { Body, Controller, Post, HttpCode, HttpStatus, Get } from '@nestjs/common';
+import User, { UserRole } from 'src/model/user.entity';
 import CreateUserDto from './dto/create-user.dto';
 import { UserService } from './user.service';
+import { Roles } from 'src/roles/roles.decorator';
 
 @Controller('user')
 export class UserController {
@@ -11,5 +12,11 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   createUser(@Body() createUserDto: CreateUserDto): Promise<User | HttpStatus> {
     return this.userService.create(createUserDto);
+  }
+
+  @Get('all')
+  @Roles(UserRole.ADMIN)
+  getUsers(): Promise<User[]> {
+    return this.userService.getAll();
   }
 }
